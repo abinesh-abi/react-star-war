@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Box, Flex, Pagination, Table, Title } from "@mantine/core";
+import { Box, Card, Flex, Pagination, Table, Title } from "@mantine/core";
 import { useAppStore } from '../../store/app.store';
 import { useQuery } from '@tanstack/react-query';
 import { peopleCrud } from '../../api/apis';
@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const Landing: FC = () => {
 
 
-	const { people, setPeople } = useAppStore((state) => state);
+	const { people, setPeople, startLoading, stopLoading } = useAppStore((state) => state);
 	const { data, error, isLoading, refetch } = useQuery({
 		queryKey: ['people'],
 		queryFn: () => fetchData(),
@@ -23,29 +23,39 @@ const Landing: FC = () => {
 
 
 	async function fetchData() {
-		return peopleCrud.get()
+		try {
+			startLoading()
+			return await peopleCrud.get()
+		} catch (error) {
+
+		} finally { stopLoading() }
 	}
 	async function getPage(page: number) {
 		try {
+			startLoading()
 			const params = urlUtils.updateQueryParam('', 'page', page)
 			const data = await peopleCrud.get(params)
 			setPeople(data)
 			setCurrentPage(page)
 		} catch (error) {
 
-		}
+		} finally { stopLoading() }
 	}
 
-	return <div>
+	return <Card h={'100%'} px={'50px'} pt={'20px'} sx={{ overflowY: 'auto' }}>
+
 
 		<Title order={4} ta={'center'} pt={20}> Peoples </Title>
 		<Flex direction={'column'}
+			p={'xl'}
+			rowGap={'xl'}
+			bg={'#eaebed'}
 			align={'center'}
 			// justify={ }
 			gap={'md'}
 		>
 			<Table
-				maw='1000px'
+			// maw='1000px'
 			>
 				<thead>
 					<tr>
@@ -70,12 +80,12 @@ const Landing: FC = () => {
 					})}
 				</tbody>
 			</Table>
-			<Box w={1000} >
+			<Box sx={{ alignSelf: 'end' }} >
 				<Pagination total={Math.ceil(people.count / 10)} value={currentPage} onChange={(page) => getPage(page)} />
 			</Box>
 			{/* <Pagination total={totalPages} value={page} onChange={setPage} withPages={false} /> */}
 		</Flex>
-	</div>
+	</Card>
 };
 
 export default Landing

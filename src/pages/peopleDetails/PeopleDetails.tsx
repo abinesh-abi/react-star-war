@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import { People } from '../../types/global';
 import ProfileVehicles from './components/ProfileVehicles';
 import ProfileFilms from './components/ProfileFilms';
+import { useAppStore } from '../../store/app.store';
 
 export default function PeopleDetails() {
     const params = useParams<{ id: string | undefined }>()
+    const { startLoading, stopLoading } = useAppStore()
     const { data, error, isLoading, refetch } = useQuery<People>({
         queryKey: ['people-details'],
         queryFn: () => fetchData(),
@@ -16,10 +18,18 @@ export default function PeopleDetails() {
         // }
     })
     async function fetchData() {
-        if (params.id) return peopleCrud.retrieve(params.id)
+        if (params.id) {
+
+            try {
+                startLoading()
+                return await peopleCrud.retrieve(params.id)
+            } catch (error) {
+                // return Promise.resolve()
+            } finally { stopLoading() }
+        }
     }
     return (
-        <Card h={'100%'} px={'50px'} pt={'20px'} sx={{overflowY:'auto'}}>
+        <Card h={'100%'} px={'50px'} pt={'20px'} sx={{ overflowY: 'auto' }}>
             <Box bg={'#2962c4'} sx={{ borderRadius: '10px', color: 'white' }}>
                 <Flex justify={'center'} py={'xl'} ><Title>{data?.name}</Title></Flex>
             </Box>

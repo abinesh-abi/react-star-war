@@ -28,24 +28,30 @@ const user = { email: 'testuser@test.com', password: '1234' }
 export default function Login() {
     const navigate = useNavigate();
 
-    const { setAuth } = useAppStore()
+    const { setAuth, startLoading, stopLoading } = useAppStore()
     const [formData, setFormData] = useState<User>({ email: '', password: '' })
     const [error, setError] = useState('')
 
     const handleLogin: FormEventHandler<HTMLFormElement> = function (e) {
         e.preventDefault()
-        const { email, password } = formData
-        if (!email || !password) return setError('Email And Passwords Are required')
-        if (email !== user.email ||
-            password !== user.password
-        ) return setError('Invalid User or Password')
+        try {
+            startLoading()
+            const { email, password } = formData
+            if (!email || !password) return setError('Email And Passwords Are required')
+            if (email !== user.email ||
+                password !== user.password
+            ) return setError('Invalid User or Password')
 
-        setError('')
+            setError('')
 
-        setAuth(true)
-        navigate('/')
+            setAuth(true)
+            navigate('/')
 
+        } catch (error) {
+
+        } finally { stopLoading() }
     }
+
     return (
         <form onSubmit={handleLogin} className='flex justify-center items-center h-full'>
             <Container size={420} my={40}>
