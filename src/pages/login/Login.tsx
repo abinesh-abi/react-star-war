@@ -23,7 +23,7 @@ import { User } from '../../types/global';
 import { useAppStore } from '../../store/app.store';
 import { useNavigate } from 'react-router-dom';
 
-const user = { email: 'testuser@gmail.com', password: '1234' }
+const user = { email: 'testuser@test.com', password: '1234' }
 
 export default function Login() {
     const navigate = useNavigate();

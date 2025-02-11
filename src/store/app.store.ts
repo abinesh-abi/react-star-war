@@ -9,7 +9,7 @@ export const INITIAL_PAGINATION = {
 
 export const useAppStore = create<Store>((set) => ({
   //authentication
-  isAuth: true,
+  isAuth: false,
   setAuth: (value) => set({ isAuth: value }),
 
   //people
