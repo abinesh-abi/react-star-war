@@ -13,7 +13,7 @@ export default function App() {
 	}, [pathname]);
 
 	return (
-		<div>
+		<div style={{background:'#eaebed',padding:'30px', height:'100vh'}}>
 			<MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
 				<Authenticate>
 						<Outlet />

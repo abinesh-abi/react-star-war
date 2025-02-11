@@ -1,9 +1,11 @@
 import { FC, useState } from 'react';
 import { Box, Flex, Pagination, Table, Title } from "@mantine/core";
 import { useAppStore } from '../../store/app.store';
-import { QueryFunction, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { peopleCrud } from '../../api/apis';
 import urlUtils from '../../utils/urlUtils';
+import { FaEye } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const Landing: FC = () => {
@@ -33,11 +35,10 @@ const Landing: FC = () => {
 
 		}
 	}
-	console.log(people)
 
 	return <div>
 
-		<Title order={4} ta={'center'} pt={20}> Films </Title>
+		<Title order={4} ta={'center'} pt={20}> Peoples </Title>
 		<Flex direction={'column'}
 			align={'center'}
 			// justify={ }
@@ -57,18 +58,20 @@ const Landing: FC = () => {
 				</thead>
 				<tbody>
 					{people.results.map((element, key) => {
+						const split = element.url.split('/')
+						const id = split[split.length - 2]
 						return <tr key={key}>
 							<td>{element.name}</td>
 							<td>{element.height}</td>
 							<td>{element.birth_year}</td>
 							<td>{element.mass}</td>
-							<td></td>
+							<td ><Link to={`/people/${id}`}><FaEye color='blue' /></Link> </td>
 						</tr>
 					})}
 				</tbody>
 			</Table>
 			<Box w={1000} >
-				<Pagination total={Math.ceil(people.count/10) } value={currentPage} onChange={(page) => getPage(page)} />
+				<Pagination total={Math.ceil(people.count / 10)} value={currentPage} onChange={(page) => getPage(page)} />
 			</Box>
 			{/* <Pagination total={totalPages} value={page} onChange={setPage} withPages={false} /> */}
 		</Flex>

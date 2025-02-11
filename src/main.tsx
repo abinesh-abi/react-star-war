@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import Landing from './pages/landing/Landing';
 import Login from './pages/login/Login';
+import PeopleDetails from './pages/peopleDetails/PeopleDetails';
 
 export const routes = [
 	{
@@ -18,7 +19,11 @@ export const routes = [
 			{
 				path: '/login',
 				element: <Login />
-			}
+			},
+			{
+				path: '/people/:id',
+				element: <PeopleDetails />
+			},
 		]
 	},
 	
