@@ -4,6 +4,7 @@ import { peopleCrud } from '../../api/apis';
 import { useParams } from 'react-router-dom';
 import { People } from '../../types/global';
 import ProfileVehicles from './components/ProfileVehicles';
+import ProfileFilms from './components/ProfileFilms';
 
 export default function PeopleDetails() {
     const params = useParams<{ id: string | undefined }>()
@@ -18,7 +19,7 @@ export default function PeopleDetails() {
         if (params.id) return peopleCrud.retrieve(params.id)
     }
     return (
-        <Card h={'100%'} px={'50px'} pt={'20px'}>
+        <Card h={'100%'} px={'50px'} pt={'20px'} sx={{overflowY:'auto'}}>
             <Box bg={'#2962c4'} sx={{ borderRadius: '10px', color: 'white' }}>
                 <Flex justify={'center'} py={'xl'} ><Title>{data?.name}</Title></Flex>
             </Box>
@@ -63,6 +64,9 @@ export default function PeopleDetails() {
                     </Box>
                 </Flex>
 
+            </Card>
+            <Card bg={'#eaebed'} my={'xl'} >
+                <ProfileFilms films={data?.films || []} />
             </Card>
             <Card bg={'#eaebed'} my={'xl'} >
                 <ProfileVehicles vehicles={data?.vehicles || []} />
