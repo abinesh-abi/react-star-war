@@ -35,7 +35,6 @@ export default function Login() {
     const handleLogin: FormEventHandler<HTMLFormElement> = function (e) {
         e.preventDefault()
         const { email, password } = formData
-        console.log({ email, password })
         if (!email || !password) return setError('Email And Passwords Are required')
         if (email !== user.email ||
             password !== user.password
