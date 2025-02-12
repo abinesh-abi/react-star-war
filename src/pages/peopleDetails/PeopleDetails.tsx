@@ -1,4 +1,4 @@
-import { Box, Card, Center, Flex, Text, Title } from '@mantine/core'
+import { Box, Card, Center, Flex, Tabs, Text, Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query';
 import { peopleCrud } from '../../api/apis';
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { People } from '../../types/global';
 import { useAppStore } from '../../store/app.store';
 import ProfileFilms from '../../components/people/ProfileFilms';
 import ProfileVehicles from '../../components/people/ProfileVehicles';
+import { FaFilm } from 'react-icons/fa';
+import { GiFarmTractor } from "react-icons/gi";
 
 export default function PeopleDetails() {
     const params = useParams<{ id: string | undefined }>()
@@ -76,10 +78,21 @@ export default function PeopleDetails() {
 
             </Card>
             <Card bg={'#eaebed'} my={'xl'} >
-                <ProfileFilms films={data?.films || []} />
-            </Card>
-            <Card bg={'#eaebed'} my={'xl'} >
-                <ProfileVehicles vehicles={data?.vehicles || []} />
+                <Tabs defaultValue="films">
+                    <Tabs.List>
+                        <Tabs.Tab value="films" icon={<FaFilm size="0.8rem" />}>Films</Tabs.Tab>
+                        <Tabs.Tab value="vehicles" icon={<GiFarmTractor size="0.8rem" />}>Vehicles</Tabs.Tab>
+                    </Tabs.List>
+
+                    <Tabs.Panel value="films" pt="xs">
+                        <ProfileFilms films={data?.films || []} />
+                    </Tabs.Panel>
+
+                    <Tabs.Panel value="vehicles" pt="xs">
+                        <ProfileVehicles vehicles={data?.vehicles || []} />
+                    </Tabs.Panel>
+
+                </Tabs>
             </Card>
         </Card>
     )
