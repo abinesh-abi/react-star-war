@@ -5,6 +5,7 @@ import { theme } from './theme';
 import './App.scss';
 import Authenticate from './components/layouts/Authenticate';
 import { useAppStore } from './store/app.store';
+import Layout from './components/layouts/Layout';
 
 export default function App() {
 	const { pathname } = useLocation();
@@ -28,7 +29,9 @@ export default function App() {
 			<div style={{ background: '#eaebed', padding: '30px', height: '100vh' }}>
 				<MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
 					<Authenticate>
+					<Layout>
 						<Outlet />
+					</Layout>
 					</Authenticate>
 				</MantineProvider>
 			</div>

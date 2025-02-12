@@ -17,15 +17,16 @@ export const routes = [
 				element: <Landing />
 			},
 			{
-				path: '/login',
-				element: <Login />
-			},
-			{
 				path: '/people/:id',
 				element: <PeopleDetails />
 			},
 		]
 	},
+	{
+		path: '/login',
+		element: <Login />,
+	}
+
 	
 ];
 
