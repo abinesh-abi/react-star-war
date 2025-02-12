@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { Vehicle } from '../../../types/global'
 import axios from 'axios'
 import { Box, Table, Text } from '@mantine/core'
-import { useAppStore } from '../../../store/app.store'
+import { useAppStore } from '../../store/app.store'
+import { Vehicle } from '../../types/global'
 
 type Props = {
     vehicles: string[]

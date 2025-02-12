@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { peopleCrud } from '../../api/apis';
 import { useParams } from 'react-router-dom';
 import { People } from '../../types/global';
-import ProfileVehicles from './components/ProfileVehicles';
-import ProfileFilms from './components/ProfileFilms';
 import { useAppStore } from '../../store/app.store';
+import ProfileFilms from '../../components/people/ProfileFilms';
+import ProfileVehicles from '../../components/people/ProfileVehicles';
 
 export default function PeopleDetails() {
     const params = useParams<{ id: string | undefined }>()
