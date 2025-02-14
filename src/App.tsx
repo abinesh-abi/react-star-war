@@ -5,7 +5,7 @@ import { theme } from './theme';
 import './App.scss';
 import Authenticate from './components/layouts/Authenticate';
 import { useAppStore } from './store/app.store';
-import Layout from './components/layouts/Layout';
+import MainLayout from './components/layouts/main-layout/MainLayout';
 
 export default function App() {
 	const { pathname } = useLocation();
@@ -26,12 +26,12 @@ export default function App() {
 				/>
 				{/* ...other content */}
 			</Box>
-			<div style={{ background: '#eaebed', padding: '30px', height: '100vh' }}>
+			<div style={{ background: '#eaebed', padding: '10px',height:'100%' }}>
 				<MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
 					<Authenticate>
-					<Layout>
+					<MainLayout>
 						<Outlet />
-					</Layout>
+					</MainLayout>
 					</Authenticate>
 				</MantineProvider>
 			</div>
