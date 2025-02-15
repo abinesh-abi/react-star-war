@@ -24,8 +24,10 @@ export default function UrlArrayTable({ apis, columns }: Props) {
     })
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        if (apis.length) {
+            fetchData()
+        }
+    }, [apis.length])
 
     async function fetchData() {
         try {

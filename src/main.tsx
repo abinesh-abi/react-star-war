@@ -12,7 +12,10 @@ import Species from './pages/species/Species';
 import Planets from './pages/planets/Planets';
 import Peoples from './pages/peoples/Peoples';
 import FilmDetails from './pages/films/FilmDetails';
-import StarShipDetailsDetails from './pages/starShips/StarShipDetailsDetails';
+import StarShipDetails from './pages/starShips/StarShipDetails';
+import VehicleDetails from './pages/vehicles/VehicleDetails';
+import SpeciesDetails from './pages/species/SpeciesDetails';
+import PlanetsDetails from './pages/planets/PlanetsDetails';
 
 export const routes = [
 	{
@@ -28,19 +31,19 @@ export const routes = [
 
 			// starship
 			{ path: '/star-ships', element: <StarShips /> },
-			{ path: '/star-ships/:id', element: <StarShipDetailsDetails /> },
+			{ path: '/star-ships/:id', element: <StarShipDetails /> },
 
-			// starship
+			// vehicle
 			{ path: '/vehicles', element: <Vehicles /> },
-			// { path: '/films/:id', element: <PeopleDetails /> },
+			{ path: '/vehicles/:id', element: <VehicleDetails /> },
 
 			// species
 			{ path: '/species', element: <Species /> },
-			// { path: '/films/:id', element: <PeopleDetails /> },
+			{ path: '/species/:id', element: <SpeciesDetails /> },
 
-			// species
+			// planets
 			{ path: '/planets', element: <Planets /> },
-			// { path: '/films/:id', element: <PeopleDetails /> },
+			{ path: '/planets/:id', element: <PlanetsDetails /> },
 		]
 	},
 	{

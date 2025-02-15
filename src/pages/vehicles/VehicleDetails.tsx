@@ -1,27 +1,20 @@
 import { Box, Card, Center, Flex, Tabs, Text, Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query';
-import { filmsCrud, peopleCrud, starShipCrud } from '../../api/apis';
 import { useParams } from 'react-router-dom';
-import { Film, People, Starship } from '../../types/global';
+import { Starship } from '../../types/global';
 import { useAppStore } from '../../store/app.store';
-import ProfileVehicles from '../../components/tables/VehiclesTable';
-import { GiFarmTractor, GiWolfHead } from "react-icons/gi";
 import DetailsItem from '../../components/comon/detailsItem/DetailsItem';
 import PeopleTable from '../../components/tables/PeopleTable';
-import PlanetTable from '../../components/tables/PlanetTable';
-import StarShipsTable from '../../components/tables/StarShipsTable';
-import SpeciesTable from '../../components/tables/SpeciesTable';
 import { PiUsersDuotone } from 'react-icons/pi';
-import { IoPlanetOutline } from 'react-icons/io5';
-import { RxRocket } from 'react-icons/rx';
 import FilmsTable from '../../components/tables/FilmsTable';
 import { FaFilm } from 'react-icons/fa';
+import { vehicleCrud } from '../../api/apis';
 
-export default function StarShipDetailsDetails() {
+export default function VehicleDetails() {
     const params = useParams<{ id: string | undefined }>()
     const { startLoading, stopLoading } = useAppStore()
     const { data, error, isLoading, refetch } = useQuery<Starship>({
-        queryKey: ['star-ships-details'],
+        queryKey: ['vehicle-details'],
         queryFn: () => fetchData(),
         // onSuccess: (data) => {
         //     // setPeople(data);
@@ -32,7 +25,7 @@ export default function StarShipDetailsDetails() {
 
             try {
                 startLoading()
-                return await starShipCrud.retrieve(params.id)
+                return await vehicleCrud.retrieve(params.id)
             } catch (error) {
                 // return Promise.resolve()
             } finally { stopLoading() }
@@ -61,7 +54,7 @@ export default function StarShipDetailsDetails() {
             <Card bg={'#eaebed'} my={'xl'} >
                 <Tabs defaultValue="pilots">
                     <Tabs.List>
-                        <Tabs.Tab value="pilots" icon={<PiUsersDuotone size="0.8rem" />}>Characters</Tabs.Tab>
+                        <Tabs.Tab value="pilots" icon={<PiUsersDuotone size="0.8rem" />}>Pilots</Tabs.Tab>
                         <Tabs.Tab value="films" icon={<FaFilm size="0.8rem" />}>Films</Tabs.Tab>
                     </Tabs.List>
 
