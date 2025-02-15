@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({
   baseURL:'https://swapi.dev/api/' ,
 });
 
-export class CurdOperations {
+export class CrudOperations {
   private api: string;
   constructor(api: string) {
     this.api = api;

@@ -1,51 +1,52 @@
-import { FC, useCallback, useEffect, useState } from 'react';
-import { Box, Card, Flex, Input, Pagination, Table, Title } from "@mantine/core";
+import { FC } from 'react';
+import { Card, Title } from "@mantine/core";
 import { useAppStore } from '../../store/app.store';
-import { useQuery } from '@tanstack/react-query';
 import { peopleCrud } from '../../api/apis';
-import urlUtils from '../../utils/urlUtils';
 import { FaEye } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import MantineDataTable from '../../components/comon/dataTable/MantineDataTable';
+import { DataTableColumn } from 'mantine-datatable';
+import { People } from '../../types/global';
 
 
 const Landing: FC = () => {
 
 
-	const { people, setPeople, startLoading, stopLoading } = useAppStore((state) => state);
-	const { data, error, isLoading, refetch } = useQuery({
-		queryKey: ['people'],
-		queryFn: () => fetchData(),
-		onSuccess: (data) => {
-			setPeople(data);
-		}
-	})
-	const [currentPage, setCurrentPage] = useState(1)
-	const [search, setSearch] = useState('')
+	const { setPeople } = useAppStore((state) => state);
+	// const { data, error, isLoading, refetch } = useQuery({
+	// 	queryKey: ['people'],
+	// 	queryFn: () => fetchData(),
+	// 	onSuccess: (data) => {
+	// 		setPeople(data);
+	// 	}
+	// })
+	// const [currentPage, setCurrentPage] = useState(1)
+	// const [search, setSearch] = useState('')
 
 
-	async function fetchData() {
-		try {
-			startLoading()
-			return await peopleCrud.get()
-		} catch (error) {
+	// async function fetchData() {
+	// 	try {
+	// 		startLoading()
+	// 		return await peopleCrud.get()
+	// 	} catch (error) {
 
-		} finally { stopLoading() }
-	}
-	async function getPage(page: number) {
-		try {
-			startLoading()
-			let params = urlUtils.updateQueryParam('', 'page', page)
-			if (search) {
-				params = urlUtils.updateQueryParam(params, 'search', search)
-			}
-			const data = await peopleCrud.get(params)
-			setPeople(data)
-			setCurrentPage(page)
-		} catch (error) {
+	// 	} finally { stopLoading() }
+	// }
+	// async function getPage(page: number) {
+	// 	try {
+	// 		startLoading()
+	// 		let params = urlUtils.updateQueryParam('', 'page', page)
+	// 		if (search) {
+	// 			params = urlUtils.updateQueryParam(params, 'search', search)
+	// 		}
+	// 		const data = await peopleCrud.get(params)
+	// 		setPeople(data)
+	// 		setCurrentPage(page)
+	// 	} catch (error) {
 
-		} finally { stopLoading() }
-	}
+	// 	} finally { stopLoading() }
+	// }
 	// async function searchPage(text: string) {
 	// 	try {
 	// 		startLoading()
@@ -61,35 +62,56 @@ const Landing: FC = () => {
 	// 	finally { stopLoading() }
 	// }
 
-	const debouncedSearch = useCallback(
-		_.debounce(async (text) => {
-			try {
-				startLoading();
-				let params = urlUtils.updateQueryParam('', 'search', text);
-				params = urlUtils.updateQueryParam(params, 'page', 1);
-				const data = await peopleCrud.get(params);
-				setPeople(data);
-				setCurrentPage(1);
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			} finally {
-				stopLoading();
-			}
-		}, 300), // Adjust the debounce delay as needed
-		[]
-	);
-	useEffect(() => {
-		debouncedSearch(search);
-		return () => {
-			debouncedSearch.cancel();
-		};
-	}, [search, debouncedSearch]);
+	// const debouncedSearch = useCallback(
+	// 	_.debounce(async (text) => {
+	// 		try {
+	// 			startLoading();
+	// 			let params = urlUtils.updateQueryParam('', 'search', text);
+	// 			params = urlUtils.updateQueryParam(params, 'page', 1);
+	// 			const data = await peopleCrud.get(params);
+	// 			setPeople(data);
+	// 			setCurrentPage(1);
+	// 		} catch (error) {
+	// 			console.error('Error fetching data:', error);
+	// 		} finally {
+	// 			stopLoading();
+	// 		}
+	// 	}, 300), // Adjust the debounce delay as needed
+	// 	[]
+	// );
+	// useEffect(() => {
+	// 	debouncedSearch(search);
+	// 	return () => {
+	// 		debouncedSearch.cancel();
+	// 	};
+	// }, [search, debouncedSearch]);
+
+
+	const columns: DataTableColumn<People>[] = [
+		{ accessor: 'name', sortable: true },
+		{ accessor: 'height', sortable: true },
+		{ accessor: 'birth_year', sortable: true },
+		{ accessor: 'mass' },
+		{
+			accessor: 'action',
+			render(record, index) {
+				const split = record.url.split('/')
+				const id = split[split.length - 2]
+				return <Link to={`/people/${id}`}><FaEye color='blue' /></Link>
+			},
+		},
+	]
 
 	return <Card h={'100%'} px={'50px'} pt={'20px'} sx={{ overflowY: 'auto' }}>
 
 
 		<Title order={4} ta={'start'} pt={1}> Peoples </Title>
-		<Flex direction={'column'}
+		<MantineDataTable
+			columns={columns}
+			stateKey='people'
+			getApi={peopleCrud.get}
+			setState={setPeople} />
+		{/* <Flex direction={'column'}
 			p={'xl'}
 			rowGap={'xl'}
 			bg={'#eaebed'}
@@ -132,9 +154,8 @@ const Landing: FC = () => {
 			<Box sx={{ alignSelf: 'end' }} >
 				<Pagination total={Math.ceil(people.count / 10)} value={currentPage} onChange={(page) => getPage(page)} />
 			</Box>
-			{/* <Pagination total={totalPages} value={page} onChange={setPage} withPages={false} /> */}
-		</Flex>
-	</Card>
+		</Flex> */}
+	</Card >
 };
 
 export default Landing

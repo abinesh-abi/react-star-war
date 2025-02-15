@@ -1,4 +1,4 @@
-import { CurdOperations } from "./AxiosInstance";
+import { CrudOperations } from "./AxiosInstance";
 
-export const filmsCrud = new CurdOperations('/films')
-export const peopleCrud = new CurdOperations('/people')
+export const filmsCrud = new CrudOperations('/films')
+export const peopleCrud = new CrudOperations('/people')
