@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { Box, Table, Text } from '@mantine/core'
+import { Box, LoadingOverlay, Table, Text } from '@mantine/core'
 import { DataTableColumn } from 'mantine-datatable'
 import { useAppStore } from '../../../store/app.store'
 import { useEffect, useState } from 'react'
@@ -12,8 +12,8 @@ type Props = {
 }
 
 export default function UrlArrayTable({ apis, columns }: Props) {
-    const { startLoading, stopLoading } = useAppStore()
     const [data, setData] = useState<Record<string, any>[]>([])
+    const [loading, setLoading] = useState(false)
     const promiseApis = apis.map(async (url) => {
         try {
             const res: Axios.AxiosXHR<any> = await axios.get(url)
@@ -29,18 +29,24 @@ export default function UrlArrayTable({ apis, columns }: Props) {
 
     async function fetchData() {
         try {
-            startLoading()
+            setLoading(true)
             const res = await Promise.all(promiseApis)
             setData(res)
             return res
         } catch (error) {
 
-        } finally { stopLoading() }
+        } finally { setLoading(false) }
 
     }
 
     return (
-        <div>
+        <Box>
+            <LoadingOverlay
+                visible={Boolean(loading)}
+                // zIndex={1000}
+                overlayBlur={2}
+                loaderProps={{ color: 'pink', type: 'bars' }}
+            />
             {
                 data.length ?
                     <MantineOfflineDataTable columns={columns} data={data} />
@@ -48,6 +54,6 @@ export default function UrlArrayTable({ apis, columns }: Props) {
                     <Box><Text ta={'center'}>No Data</Text></Box>
             }
 
-        </div>
+        </Box>
     )
 }

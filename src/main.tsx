@@ -12,6 +12,7 @@ import Species from './pages/species/Species';
 import Planets from './pages/planets/Planets';
 import Peoples from './pages/peoples/Peoples';
 import FilmDetails from './pages/films/FilmDetails';
+import StarShipDetailsDetails from './pages/starShips/StarShipDetailsDetails';
 
 export const routes = [
 	{
@@ -27,7 +28,7 @@ export const routes = [
 
 			// starship
 			{ path: '/star-ships', element: <StarShips /> },
-			// { path: '/films/:id', element: <PeopleDetails /> },
+			{ path: '/star-ships/:id', element: <StarShipDetailsDetails /> },
 
 			// starship
 			{ path: '/vehicles', element: <Vehicles /> },

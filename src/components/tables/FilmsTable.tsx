@@ -1,4 +1,3 @@
-import { Text } from '@mantine/core'
 import { Film } from '../../types/global'
 import { DataTableColumn } from 'mantine-datatable'
 import UrlArrayTable from '../comon/urlArrayTable/UrlArrayTable'

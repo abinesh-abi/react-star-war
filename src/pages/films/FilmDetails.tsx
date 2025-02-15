@@ -7,12 +7,15 @@ import { useAppStore } from '../../store/app.store';
 import ProfileFilms from '../../components/tables/FilmsTable';
 import ProfileVehicles from '../../components/tables/VehiclesTable';
 import { FaFilm } from 'react-icons/fa';
-import { GiFarmTractor } from "react-icons/gi";
+import { GiFarmTractor, GiWolfHead } from "react-icons/gi";
 import DetailsItem from '../../components/comon/detailsItem/DetailsItem';
 import PeopleTable from '../../components/tables/PeopleTable';
 import PlanetTable from '../../components/tables/PlanetTable';
 import StarShipsTable from '../../components/tables/StarShipsTable';
 import SpeciesTable from '../../components/tables/SpeciesTable';
+import { PiUsersDuotone } from 'react-icons/pi';
+import { IoPlanetOutline } from 'react-icons/io5';
+import { RxRocket } from 'react-icons/rx';
 
 export default function FilmDetails() {
     const params = useParams<{ id: string | undefined }>()
@@ -60,11 +63,11 @@ export default function FilmDetails() {
             <Card bg={'#eaebed'} my={'xl'} >
                 <Tabs defaultValue="characters">
                     <Tabs.List>
-                        <Tabs.Tab value="characters" icon={<FaFilm size="0.8rem" />}>Characters</Tabs.Tab>
+                        <Tabs.Tab value="characters" icon={<PiUsersDuotone size="0.8rem" />}>Characters</Tabs.Tab>
                         <Tabs.Tab value="vehicles" icon={<GiFarmTractor size="0.8rem" />}>Vehicles</Tabs.Tab>
-                        <Tabs.Tab value="planets" icon={<GiFarmTractor size="0.8rem" />}>Planets</Tabs.Tab>
-                        <Tabs.Tab value="starShips" icon={<GiFarmTractor size="0.8rem" />}>Star Ships</Tabs.Tab>
-                        <Tabs.Tab value="species" icon={<GiFarmTractor size="0.8rem" />}>Species</Tabs.Tab>
+                        <Tabs.Tab value="planets" icon={<IoPlanetOutline size="0.8rem" />}>Planets</Tabs.Tab>
+                        <Tabs.Tab value="starShips" icon={<RxRocket size="0.8rem" />}>Star Ships</Tabs.Tab>
+                        <Tabs.Tab value="species" icon={<GiWolfHead size="0.8rem" />}>Species</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value="characters" pt="xs">
