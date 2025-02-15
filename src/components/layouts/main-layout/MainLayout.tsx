@@ -41,8 +41,8 @@ export default function MainLayout({ children }: Props) {
                     {/* <Navbar.Section grow>First section</Navbar.Section> */}
                     <SidebarItems Icon={CiUser} text='People' path='/' />
                     <SidebarItems Icon={PiFilmReelLight} text='Films' path='/films'  />
-                    <SidebarItems Icon={RxRocket} text='Star Ships' path='/star-ship' />
-                    <SidebarItems Icon={LiaTruckPickupSolid} text='Vehicle' path='/vehicle' />
+                    <SidebarItems Icon={RxRocket} text='Star Ships' path='/star-ships' />
+                    <SidebarItems Icon={LiaTruckPickupSolid} text='Vehicle' path='/vehicles' />
                     <SidebarItems Icon={GiWolfHead} text='Species' path='/species' />
                     <SidebarItems Icon={IoPlanetOutline} text='Planets'  path='/planets' />
                     

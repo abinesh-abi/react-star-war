@@ -24,4 +24,20 @@ export const useAppStore = create<Store>((set) => ({
   //films
   films: INITIAL_PAGINATION,
   setFilms: (films) => set({ films }),
+
+  //staship
+  starShips: INITIAL_PAGINATION,
+  setStarShips: (starShips) => set({ starShips }),
+
+  //vehicles
+  vehicles: INITIAL_PAGINATION,
+  setVehicles: (vehicles) => set({ vehicles }),
+
+  //species
+  species: INITIAL_PAGINATION,
+  setSpecies: (species) => set({ species }),
+
+  //planets
+  planets: INITIAL_PAGINATION,
+  setPlanets: (planets) => set({ planets }),
 }));

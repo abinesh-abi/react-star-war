@@ -7,6 +7,10 @@ import Landing from './pages/landing/Landing';
 import Login from './pages/login/Login';
 import PeopleDetails from './pages/peopleDetails/PeopleDetails';
 import Films from './pages/films/Films';
+import StarShips from './pages/starShips/StarShips';
+import Vehicles from './pages/vehicles/Vehicles';
+import Species from './pages/species/Species';
+import Planets from './pages/planets/Planets';
 
 export const routes = [
 	{
@@ -18,6 +22,22 @@ export const routes = [
 			{ path: '/people/:id', element: <PeopleDetails /> },
 			// films
 			{ path: '/films', element: <Films /> },
+			// { path: '/films/:id', element: <PeopleDetails /> },
+
+			// starship
+			{ path: '/star-ships', element: <StarShips /> },
+			// { path: '/films/:id', element: <PeopleDetails /> },
+
+			// starship
+			{ path: '/vehicles', element: <Vehicles /> },
+			// { path: '/films/:id', element: <PeopleDetails /> },
+
+			// species
+			{ path: '/species', element: <Species /> },
+			// { path: '/films/:id', element: <PeopleDetails /> },
+
+			// species
+			{ path: '/planets', element: <Planets /> },
 			// { path: '/films/:id', element: <PeopleDetails /> },
 		]
 	},

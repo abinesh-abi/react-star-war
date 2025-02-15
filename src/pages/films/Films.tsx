@@ -3,11 +3,14 @@ import MantineDataTable from '../../components/comon/dataTable/MantineDataTable'
 import { filmsCrud } from '../../api/apis'
 import { useAppStore } from '../../store/app.store';
 import { DataTableColumn } from 'mantine-datatable';
+import { Film } from '../../types/global';
+import { Link } from 'react-router-dom';
+import { FaEye } from 'react-icons/fa';
 
 export default function Films() {
     const { setFilms } = useAppStore((state) => state);
 
-    const columns: DataTableColumn<any>[] = [
+    const columns: DataTableColumn<Film>[] = [
         { accessor: 'title', sortable: true },
         { accessor: 'director', sortable: true },
         { accessor: 'release_date', sortable: true },
@@ -15,7 +18,9 @@ export default function Films() {
         {
             accessor: 'action',
             render(record, index) {
-                return <>hi</>
+                const split = record.url.split('/')
+                const id = split[split.length - 2]
+                return <Link to={`/films/${id}`}><FaEye color='blue' /></Link>
             },
         },
     ]
