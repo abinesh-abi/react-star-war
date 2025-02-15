@@ -1,6 +1,6 @@
 import { createStyles, Group, Text, UnstyledButton } from '@mantine/core'
 import { IconType } from 'react-icons'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 type Props = { Icon: IconType, text: string, path: string }
 
@@ -28,9 +28,12 @@ const useStyles = createStyles((theme) => ({
 
 export default function SidebarItems({ Icon, text, path }: Props) {
     const { classes } = useStyles();
+    const location = useLocation();
+    const pathname = location.pathname
+    const isSelectedSidebar = pathname.startsWith(path)
     return (
         // <UnstyledButton c={'white'} p={'sm'} m={'sm'} style={{ border: '1px solid white', borderRadius: '10px' }}>
-        <UnstyledButton className={`${classes.button} ${false ? 'selected' : ''}`}>
+        <UnstyledButton className={`${classes.button} ${isSelectedSidebar ? 'selected' : ''}`}>
             <Link to={path} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                 <Group>
                     <Icon />

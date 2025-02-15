@@ -39,7 +39,7 @@ export default function MainLayout({ children }: Props) {
                 <Navbar bg={'#1b2433'}
                     p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
                     {/* <Navbar.Section grow>First section</Navbar.Section> */}
-                    <SidebarItems Icon={CiUser} text='People' path='/' />
+                    <SidebarItems Icon={CiUser} text='People' path='/#' />
                     <SidebarItems Icon={PiFilmReelLight} text='Films' path='/films'  />
                     <SidebarItems Icon={RxRocket} text='Star Ships' path='/star-ships' />
                     <SidebarItems Icon={LiaTruckPickupSolid} text='Vehicle' path='/vehicles' />
