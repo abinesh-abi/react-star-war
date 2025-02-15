@@ -10,7 +10,7 @@ import { DataTableColumn } from 'mantine-datatable';
 import { People } from '../../types/global';
 
 
-const Landing: FC = () => {
+const Peoples: FC = () => {
 
 
 	const { setPeople } = useAppStore((state) => state);
@@ -158,5 +158,5 @@ const Landing: FC = () => {
 	</Card >
 };
 
-export default Landing
+export default Peoples
 

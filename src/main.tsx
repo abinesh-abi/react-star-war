@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
-import Landing from './pages/landing/Landing';
 import Login from './pages/login/Login';
-import PeopleDetails from './pages/peopleDetails/PeopleDetails';
+import PeopleDetails from './pages/peoples/PeopleDetails';
 import Films from './pages/films/Films';
 import StarShips from './pages/starShips/StarShips';
 import Vehicles from './pages/vehicles/Vehicles';
 import Species from './pages/species/Species';
 import Planets from './pages/planets/Planets';
+import Peoples from './pages/peoples/Peoples';
+import FilmDetails from './pages/films/FilmDetails';
 
 export const routes = [
 	{
@@ -18,11 +19,11 @@ export const routes = [
 		element: <App />,
 		children: [
 			//people
-			{ path: '/', element: <Landing /> },
+			{ path: '/', element: <Peoples /> },
 			{ path: '/people/:id', element: <PeopleDetails /> },
 			// films
 			{ path: '/films', element: <Films /> },
-			// { path: '/films/:id', element: <PeopleDetails /> },
+			{ path: '/films/:id', element: <FilmDetails /> },
 
 			// starship
 			{ path: '/star-ships', element: <StarShips /> },

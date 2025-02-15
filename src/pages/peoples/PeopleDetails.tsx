@@ -4,10 +4,11 @@ import { peopleCrud } from '../../api/apis';
 import { useParams } from 'react-router-dom';
 import { People } from '../../types/global';
 import { useAppStore } from '../../store/app.store';
-import ProfileFilms from '../../components/people/ProfileFilms';
-import ProfileVehicles from '../../components/people/ProfileVehicles';
+import ProfileFilms from '../../components/tables/FilmsTable';
+import ProfileVehicles from '../../components/tables/VehiclesTable';
 import { FaFilm } from 'react-icons/fa';
 import { GiFarmTractor } from "react-icons/gi";
+import DetailsItem from '../../components/comon/detailsItem/DetailsItem';
 
 export default function PeopleDetails() {
     const params = useParams<{ id: string | undefined }>()
@@ -38,41 +39,16 @@ export default function PeopleDetails() {
             <Card bg={'#eaebed'} my={'xl'} >
                 <Flex justify={'space-around'}>
                     <Box>
-
-                        <Flex>
-                            <Text pr={'10px'}>Name: </Text>
-                            <Text>{data?.name}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Hight: </Text>
-                            <Text>{data?.height}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Mass: </Text>
-                            <Text>{data?.mass}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Hair Color: </Text>
-                            <Text>{data?.hair_color}</Text>
-                        </Flex>
+                        <DetailsItem name='Name' value={data?.name} />
+                        <DetailsItem name='Hight' value={data?.height} />
+                        <DetailsItem name='Mass' value={data?.mass} />
+                        <DetailsItem name='Hair Color' value={data?.hair_color} />
                     </Box>
                     <Box>
-                        <Flex>
-                            <Text pr={'10px'}>Skin Color: </Text>
-                            <Text>{data?.skin_color}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Eye Color: </Text>
-                            <Text>{data?.eye_color}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Birth Year: </Text>
-                            <Text>{data?.birth_year}</Text>
-                        </Flex>
-                        <Flex>
-                            <Text pr={'10px'}>Gender: </Text>
-                            <Text>{data?.gender}</Text>
-                        </Flex>
+                        <DetailsItem name='Skin Color' value={data?.skin_color} />
+                        <DetailsItem name='Eye Color' value={data?.eye_color} />
+                        <DetailsItem name='Birth Year' value={data?.birth_year} />
+                        <DetailsItem name='Gender' value={data?.gender} />
                     </Box>
                 </Flex>
 
@@ -85,11 +61,11 @@ export default function PeopleDetails() {
                     </Tabs.List>
 
                     <Tabs.Panel value="films" pt="xs">
-                        <ProfileFilms films={data?.films || []} />
+                        <ProfileFilms urls={data?.films || []} />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="vehicles" pt="xs">
-                        <ProfileVehicles vehicles={data?.vehicles || []} />
+                        <ProfileVehicles urls={data?.vehicles || []} />
                     </Tabs.Panel>
 
                 </Tabs>
