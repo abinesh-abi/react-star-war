@@ -89,8 +89,8 @@ const Landing: FC = () => {
 
 	const columns: DataTableColumn<People>[] = [
 		{ accessor: 'name', sortable: true },
-		{ accessor: 'height', sortable: true },
-		{ accessor: 'birth_year', sortable: true },
+		{ accessor: 'height',  },
+		{ accessor: 'birth_year' },
 		{ accessor: 'mass' },
 		{
 			accessor: 'action',

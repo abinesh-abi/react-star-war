@@ -13,7 +13,7 @@ export default function StarShips() {
     const columns: DataTableColumn<Starship>[] = [
         { accessor: 'name', sortable: true },
         { accessor: 'model', sortable: true },
-        { accessor: 'manufacturer', sortable: true },
+        { accessor: 'manufacturer'},
         { accessor: 'max_atmosphering_speed'},
         { accessor: 'crew' },
         { accessor: 'cargo_capacity' },
